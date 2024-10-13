@@ -1,67 +1,87 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { FaUser, FaCog, FaTachometerAlt, FaBars, FaTimes } from 'react-icons/fa';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { login } = useContext(AuthContext);
+const Dashboard = () => {
   const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-
-    if (storedUser && storedUser.email === email && storedUser.password === password) {
-      alert('Login successful!');
-      login();
-      navigate('/dashboard'); 
-    } else {
-      alert('Invalid credentials, please try again.');
-    }
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-blue-500 to-purple-600 px-4 sm:px-0">
-      <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-xl sm:text-3xl font-bold mb-6 text-center text-gray-700">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
-          <div>
-            <label className="block mb-2 text-gray-600">Email</label>
-            <input
-              type="email"
-              value={email}
-              autoComplete="off"
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300"
-              required
-            />
+    <div className="min-h-screen flex bg-gray-100">
+      {/* Sidebar */}
+      <aside
+        className={`fixed inset-y-0 left-0 transform ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:relative md:translate-x-0 w-64 bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg transition-transform duration-300 ease-in-out z-50`}
+      >
+        <nav className="space-y-6 p-6">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-bold">Dashboard</h1>
           </div>
-          <div>
-            <label className="block mb-2 text-gray-600">Password</label>
-            <input
-              type="password"
-              value={password}
-              autoComplete="off"
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 sm:py-3 rounded-lg font-semibold transition-colors duration-300"
+          <a
+            href="#"
+            className="block text-lg flex items-center space-x-3 hover:bg-blue-700 py-2 px-3 rounded-lg transition duration-300 ease-in-out"
           >
-            Login
+            <FaTachometerAlt className="text-xl" />
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="#"
+            className="block text-lg flex items-center space-x-3 hover:bg-blue-700 py-2 px-3 rounded-lg transition duration-300 ease-in-out"
+          >
+            <FaUser className="text-xl" />
+            <span>Profile</span>
+          </a>
+          <a
+            href="#"
+            className="block text-lg flex items-center space-x-3 hover:bg-blue-700 py-2 px-3 rounded-lg transition duration-300 ease-in-out"
+          >
+            <FaCog className="text-xl" />
+            <span>Settings</span>
+          </a>
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col p-8">
+        <header className="flex justify-between items-center bg-white p-6 rounded-lg shadow-md">
+          <h1 className="text-2xl font-bold">Welcome to the Dashboard</h1>
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300"
+          >
+            Logout
           </button>
-        </form>
-        <div className="mt-6 text-center">
-          <Link to="/signup" className="text-blue-600 hover:text-blue-700 font-medium">Don't have an account? Register</Link>
+        </header>
+
+        <div className="mt-8 flex-grow">
+          {/* Content area for future dynamic content */}
+          <p className="text-gray-700">
+            This is where the dynamic content for the dashboard will appear.
+          </p>
         </div>
+
+        {/* Sidebar Toggle Button for Mobile */}
+        <button
+          className="md:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white p-3 rounded-full shadow-lg focus:outline-none"
+          onClick={toggleSidebar}
+        >
+          {isSidebarOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
+        </button>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Dashboard;
