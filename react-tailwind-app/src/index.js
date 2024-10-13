@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css'; // Make sure this includes your Tailwind directives
+import './index.css'; 
 import App from './App';
 
 ReactDOM.render(

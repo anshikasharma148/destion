@@ -15,8 +15,8 @@ const Login = () => {
 
     if (storedUser && storedUser.email === email && storedUser.password === password) {
       alert('Login successful!');
-      login(); // Update authentication state
-      navigate('/dashboard'); // Redirect to dashboard after successful login
+      login(); 
+      navigate('/dashboard'); 
     } else {
       alert('Invalid credentials, please try again.');
     }
