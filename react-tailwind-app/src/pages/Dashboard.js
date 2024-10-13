@@ -29,27 +29,27 @@ const Dashboard = () => {
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold">Dashboard</h1>
           </div>
-          <a
-            href="#"
-            className="block text-lg flex items-center space-x-3 hover:bg-blue-700 py-2 px-3 rounded-lg transition duration-300 ease-in-out"
+          <button
+            className="text-lg flex items-center space-x-3 hover:bg-blue-700 py-2 px-3 rounded-lg transition duration-300 ease-in-out text-left w-full"
+            onClick={() => navigate('/dashboard')}
           >
             <FaTachometerAlt className="text-xl" />
             <span>Dashboard</span>
-          </a>
-          <a
-            href="#"
-            className="block text-lg flex items-center space-x-3 hover:bg-blue-700 py-2 px-3 rounded-lg transition duration-300 ease-in-out"
+          </button>
+          <button
+            className="text-lg flex items-center space-x-3 hover:bg-blue-700 py-2 px-3 rounded-lg transition duration-300 ease-in-out text-left w-full"
+            onClick={() => navigate('#')}
           >
             <FaUser className="text-xl" />
             <span>Profile</span>
-          </a>
-          <a
-            href="#"
-            className="block text-lg flex items-center space-x-3 hover:bg-blue-700 py-2 px-3 rounded-lg transition duration-300 ease-in-out"
+          </button>
+          <button
+            className="text-lg flex items-center space-x-3 hover:bg-blue-700 py-2 px-3 rounded-lg transition duration-300 ease-in-out text-left w-full"
+            onClick={() => navigate('#')}
           >
             <FaCog className="text-xl" />
             <span>Settings</span>
-          </a>
+          </button>
         </nav>
       </aside>
 
